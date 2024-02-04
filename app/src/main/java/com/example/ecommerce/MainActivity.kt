@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ecommerce.presentation.ui.theme.EcommerceTheme
 
-
+/**
+ * https://youtu.be/7XJCosC5XNE?t=868
+ * */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
