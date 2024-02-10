@@ -67,6 +67,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    //Navigation
+    val nav_version = "2.6.0"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     //Dagger- Hilt
     val hilt_version = "2.48"
@@ -81,6 +84,12 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")//Couroutines support
+
+    //Retrofit
+    val retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
 kapt{
     correctErrorTypes = true
