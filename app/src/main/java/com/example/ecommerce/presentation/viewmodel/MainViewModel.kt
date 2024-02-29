@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecommerce.domain.model.ProductItem
 import com.example.ecommerce.domain.usecase.AddProductToCartUseCase
+import com.example.ecommerce.domain.usecase.GetItemCountUseCase
 import com.example.ecommerce.domain.usecase.GetProductsUseCase
 import com.example.ecommerce.presentation.ui.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
-    private val addProductToCartUseCase: AddProductToCartUseCase
+    private val addProductToCartUseCase: AddProductToCartUseCase,
+    private val getItemCountUseCase: GetItemCountUseCase
 ) : ViewModel() {
 
     var state by mutableStateOf(HomeState())
@@ -28,7 +30,8 @@ class MainViewModel @Inject constructor(
 
     fun onItemClick(productItem: ProductItem){
         viewModelScope.launch {
-            addProductToCartUseCase.invoke(productItem)
+            val count = getItemCountUseCase(productItem)
+            addProductToCartUseCase(productItem, count)
         }
     }
 
@@ -38,7 +41,7 @@ class MainViewModel @Inject constructor(
                 isLoading = true
             )
 
-            getProductsUseCase.invoke()
+            getProductsUseCase()
                 .onSuccess {
                     state = state.copy(
                         products = it

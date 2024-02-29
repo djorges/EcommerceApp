@@ -6,14 +6,22 @@ import com.example.ecommerce.domain.model.ProductItem
 import com.example.ecommerce.domain.repository.ProductRepository
 import javax.inject.Inject
 
-class AddProductToCartUseCase @Inject constructor(
+class MinusProductToCartUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
     suspend operator fun invoke(productItem: ProductItem, count: Int){
+        if(count <= 0) return
+        
+        val newCount = count - 1
         val cartItem = CartItem(
             item = productItem,
-            amount = count + 1
+            amount = newCount
         )
-       repository.addItemToCart(cartItem.toEntity())
+
+        if(newCount == 0){
+            repository.removeItemFromCart(cartItem.toEntity())
+        }else {
+            repository.addItemToCart(cartItem.toEntity())
+        }
     }
 }

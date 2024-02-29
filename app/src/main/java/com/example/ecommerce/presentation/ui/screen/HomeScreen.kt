@@ -41,7 +41,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ){
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(16.dp)
             ){
                 items(state.products){

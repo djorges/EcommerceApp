@@ -1,9 +1,14 @@
 package com.example.ecommerce.data.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.ecommerce.data.api.ProductApi
+import com.example.ecommerce.data.db.ProductDao
+import com.example.ecommerce.data.db.ProductDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -23,5 +28,18 @@ object ProductModule{
             .build()
             .create(ProductApi::class.java)
     }
-    private const val BASE_URL = ""
+
+    @Provides
+    @Singleton
+    fun provideDao(
+        @ApplicationContext context: Context
+    ): ProductDao{
+        return Room.databaseBuilder(
+            context,
+            ProductDatabase::class.java,
+            DB_NAME
+        ).build().dao
+    }
+    private const val DB_NAME = "product_db"
+    private const val BASE_URL = "https://raw.githubusercontent.com/djorges/EcommerceApp/master/app/src/main/res/raw/"
 }

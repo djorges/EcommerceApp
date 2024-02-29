@@ -10,12 +10,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun StoreButton(text: String, onClick: () -> Unit, modifier: Modifier) {
+fun StoreButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
         modifier = modifier,
         shape = RoundedCornerShape(20.dp),
-        colors= ButtonDefaults.buttonColors(
+        colors = ButtonDefaults.buttonColors(
             contentColor = Color.Green
         )
     ){
